@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Demoアプリケーション</title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <h1>Hello world!</h1>
+    <p>Nameリスト</p>
+    <table>
+      <thead><tr><th>key</th><th>name</th></tr></thead>
+      <tbody>
+        <tr th:each="data : ${names}"><td th:text="${data.key}"></td><td th:text="${data.name}"></td></tr>
+      </tbody>
+    </table>
+  </body>
+</html>
