@@ -1,0 +1,181 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- (1)共通にしたいheadをfragment化する -->
+<head th:fragment="meta_header(title,links,scripts)">
+    <!--
+        ===
+        This comment should NOT be removed.
+
+        Charisma v2.0.0
+
+        Copyright 2012-2014 Muhammad Usman
+        Licensed under the Apache License v2.0
+        http://www.apache.org/licenses/LICENSE-2.0
+
+        http://usman.it
+        http://twitter.com/halalit_usman
+        ===
+    -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- (2)共通で読み込むCSS/JS -->
+
+    <!-- The styles -->
+    <link id="bs-css" href="css/bootstrap-darkly.min.css" rel="stylesheet">
+
+    <link href="css/charisma-app.css" rel="stylesheet">
+    <link href='bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
+    <link href='bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'>
+    <link href='bower_components/chosen/chosen.min.css' rel='stylesheet'>
+    <link href='bower_components/colorbox/example3/colorbox.css' rel='stylesheet'>
+    <link href='bower_components/responsive-tables/responsive-tables.css' rel='stylesheet'>
+    <link href='bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css' rel='stylesheet'>
+    <link href='css/jquery.noty.css' rel='stylesheet'>
+    <link href='css/noty_theme_default.css' rel='stylesheet'>
+    <link href='css/elfinder.min.css' rel='stylesheet'>
+    <link href='css/elfinder.theme.css' rel='stylesheet'>
+    <link href='css/jquery.iphone.toggle.css' rel='stylesheet'>
+    <link href='css/uploadify.css' rel='stylesheet'>
+    <link href='css/animate.min.css' rel='stylesheet'>
+
+    <!-- jQuery -->
+    <script src="bower_components/jquery/jquery.min.js"></script>
+
+    <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- The fav icon -->
+    <link rel="shortcut icon" href="img/favicon.ico">
+    
+    <!-- (3)タイトルのフォーマット -->
+    <title th:text="${title}+' | 5-en'">各ページタイトル | 5-en</title>
+
+    <!-- (4)各View固有で読み込むもの -->
+    <th:block th:replace="${links} ?: _" />
+    <th:block th:replace="${scripts} ?: _" />
+</head>
+<body>
+    <!-- (5)body内で共通化したい部品をfragment化する -->
+    <!-- <header th:fragment="header">
+        <h1><a th:href="@{'/'}">sample app</a></h1>
+    </header> -->
+
+    <!-- topbar starts -->
+    <div class="navbar navbar-default" role="navigation" th:fragment="topbar">
+
+        <div class="navbar-inner">
+            <button type="button" class="navbar-toggle pull-left animated flip">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"> <img alt="Charisma Logo" src="img/logo20.png" class="hidden-xs"/>
+                <span>5-en 五縁</span></a>
+
+            <!-- user dropdown starts -->
+            <!-- <div class="btn-group pull-right">
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> admin</span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Profile</a></li>
+                    <li class="divider"></li>
+                    <li><a href="login.html">Logout</a></li>
+                </ul>
+            </div> -->
+            <!-- user dropdown ends -->
+
+            <!-- theme selector starts -->
+            <div class="btn-group pull-right theme-container animated tada">
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <i class="glyphicon glyphicon-tint"></i><span
+                        class="hidden-sm hidden-xs"> Change Theme / Skin</span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" id="themes">
+                    <li><a data-value="classic" href="#"><i class="whitespace"></i> Classic</a></li>
+                    <li><a data-value="cerulean" href="#"><i class="whitespace"></i> Cerulean</a></li>
+                    <li><a data-value="cyborg" href="#"><i class="whitespace"></i> Cyborg</a></li>
+                    <li><a data-value="simplex" href="#"><i class="whitespace"></i> Simplex</a></li>
+                    <li><a data-value="darkly" href="#"><i class="whitespace"></i> Darkly</a></li>
+                    <li><a data-value="lumen" href="#"><i class="whitespace"></i> Lumen</a></li>
+                    <li><a data-value="slate" href="#"><i class="whitespace"></i> Slate</a></li>
+                    <li><a data-value="spacelab" href="#"><i class="whitespace"></i> Spacelab</a></li>
+                    <li><a data-value="united" href="#"><i class="whitespace"></i> United</a></li>
+                </ul>
+            </div>
+            <!-- theme selector ends -->
+
+            <ul class="collapse navbar-collapse nav navbar-nav top-menu">
+                <li><a href="#"><i class="glyphicon glyphicon-globe"></i> Visit Site</a></li>
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown"><i class="glyphicon glyphicon-star"></i> 外部のサイト <span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="https://www.facebook.com/imayday555/">五月天 Mayday Facebook</a></li>
+                        <li><a href="https://www.mayday.jp/">Mayday Japanese Official Website</a></li>
+                        <li><a href="https://www.bin-music.com.tw/artist">相信音樂</a></li>
+                        <li class="divider"></li>
+                        <li><a href="http://go-lin.com/">語林中国語教室</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <form class="navbar-search pull-left">
+                        <input placeholder="歌詞検索" class="search-query form-control col-md-10" name="query"
+                               type="text">
+                    </form>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+    <!-- topbar ends -->
+
+    <!-- left menu starts -->
+    <div class="col-sm-2 col-lg-2" th:fragment="left_menu">
+        <div class="sidebar-nav">
+            <div class="nav-canvas">
+                <div class="nav-sm nav nav-stacked">
+
+                </div>
+                <ul class="nav nav-pills nav-stacked main-menu">
+                    <li class="nav-header">Main</li>
+                    <li><a class="ajax-link" href="index.html"><i class="glyphicon glyphicon-home"></i><span> Dashboard</span></a>
+                    </li>
+                    <li><a class="ajax-link" href="list"><i class="glyphicon glyphicon-align-justify"></i><span> 曲リスト</span></a>
+                    </li>
+                    <li><a class="ajax-link" href="gallery"><i class="glyphicon glyphicon-picture"></i><span> ギャラリー</span></a>
+                    </li>
+                    <li class="nav-header hidden-md">Sample Section</li>
+                    <li><a class="ajax-link" href="calendar"><i class="glyphicon glyphicon-calendar"></i><span> スケジュール</span></a>
+                    </li>
+                    <li class="accordion">
+                        <a href="#"><i class="glyphicon glyphicon-plus"></i><span>(開発用 Menu)</span></a>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="dashboard">dashboard</a></li>
+                            <li><a href="bootstrap">bootstrap</a></li>
+                        </ul>
+                    </li>
+                    <!-- <li><a href="login.html"><i class="glyphicon glyphicon-lock"></i><span> Login Page</span></a>
+                    </li> -->
+                </ul>
+                <!-- <label id="for-is-ajax" for="is-ajax"><input id="is-ajax" type="checkbox"> Ajax on menu</label> -->
+            </div>
+        </div>
+    </div>
+    <!--/span-->
+    <!-- left menu ends -->
+
+    <footer class="row" th:fragment="footer">
+        <p class="col-md-9 col-sm-9 col-xs-12 copyright">&copy; <a href="https://www.programmers-office.ml/" target="_blank">
+                JayQ</a> 2020</p>
+
+        <p class="col-md-3 col-sm-3 col-xs-12 powered-by">Powered by: <a
+                href="http://usman.it/free-responsive-admin-template">Charisma</a></p>
+    </footer>
+
+</body>
+</html>

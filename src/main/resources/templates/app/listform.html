@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/template :: layout(~{::title},~{::body/content()})}">
+
+<head>
+  <title>曲検索</title>
+
+  <style>
+    .pagination {
+      padding-left: 0px;
+    }
+
+    .pagination:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    .page-item {
+      display: inline;
+      min-width: 30px;
+      text-align: center;
+      border: 1px solid #EEEEEE;
+      float: left;
+    }
+  </style>
+</head>
+
+<body>
+  <h3>曲リスト</h3>
+  <form th:action="@{/search}" th:object="${form}" method="post">
+    <div>
+      <label>絞り込み検索</label>
+      <input type="text" th:field="*{lyrics}" />
+    </div>
+    <input type="submit" value="検索" />
+  </form>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>曲名</th>
+        <th>歌詞</th>
+        <th>映像URL</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="music:${musiclist}">
+        <td th:utext="${music.title}"></td>
+        <td th:utext="${music.lyrics}"></td>
+        <td th:text="${music.url}"></td>
+        <td><a class="btn btn-default btn-xs" th:href="@{/music/{id}(id=${music.id})}">参照</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- <form th:action="@{/pagenate}" th:object="${page}" method="get">
+    <div class="float-right">
+      <div>
+        <span th:text="${page.number+1}"></span>
+        <span>/</span>
+        <span th:text="${page.totalPages}"></span>
+        <span>頁を表示</span>
+      </div>
+      <div th:fragment='paginationbar'>
+        <ul>
+          <li class="page-item">
+            <span th:if="${page.first}">←先頭</span>
+            <a th:if="${not page.first}" th:href="@{${url}(page=0)}">←先頭</a>
+          </li>
+          <li class="page-item" th:each='i : ${#numbers.sequence(0, page.totalPages-1)}'>
+            <span th:if='${i}==${page.number}' th:text='${i+1}'>1</span>
+            <a th:if='${i}!=${page.number}' th:href="@{${url}(page=${i})}">
+                <span th:text='${i+1}'>1</span>
+            </a>
+          </li>
+          <li class="page-item">
+            <span th:if="${page.last}">末尾➝</span>
+            <a th:if="${not page.last}" th:href="@{${url}(page=(${page.totalPages}-1))}">末尾➝</a>           </li>
+        </ul>
+       </div>
+     </div>
+   </form> -->
+  </body>
+</html>

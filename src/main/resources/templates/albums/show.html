@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/template :: layout(~{::title},~{::body/content()})}">
+
+<head>
+  <title>アルバム情報</title>
+</head>
+
+<body>
+  <div th:object="${album}">
+    <img th:src="@{*{images}}" class="img-circle pull-left" style="width: 100px;height: 100px;">
+    <h3 th:text="*{albumname}"></h3>
+
+    <div>
+      <a class="btn btn-default btn-xs" target="_blank" th:href="@{*{url}}" th:text="*{url}"></a><br />
+
+    </div>
+
+  </div>
+
+  <table class="table table-hover">
+    <tbody>
+
+      <tr th:each="music:${musics}">
+        <td>
+          【<span th:utext="${music.title}"></span>】
+          <a class="btn btn-primary btn-sm" th:href="@{/musics/{id}(id=${music.id})}">詳細</a>
+          <br />
+          <span th:utext="${music.lyrics}"></span><br />
+          <div th:if="${music.getYoutubeThumb() != null}">
+            <img th:src="@{${music.getYoutubeThumb()}}">
+            <a class="btn btn-default btn-xs" target="_blank" th:href="@{${music.url}}"
+              th:text="${music.url}"></a><br />
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pull-right">
+    <a class="btn btn-link" href="/albums">一覧画面へ</a>
+  </div>
+
+</body>
+
+</html>

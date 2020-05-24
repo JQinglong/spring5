@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/template :: layout(~{::title},~{::body/content()})}">
+
+<head>
+  <title>曲情報</title>
+</head>
+
+<body>
+  <div th:object="${music}">
+    <h3 th:text="*{title}"></h3>
+
+    <div>
+      <pre th:text="*{lyrics}"></pre>
+    </div>
+    <div th:if="${music.getYoutubeThumb() != null}">
+      <iframe width="560" height="315" src="" 　th:attr="src=${youtube}" frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+  <div class="pull-right">
+    <a class="btn btn-link" href="/musics">一覧画面へ</a>
+  </div>
+
+  <table class="table table-hover">
+
+    <tbody>
+
+      <tr th:each="album:${albums}">
+        <td>
+          <img th:src="@{${album.images}}" class="dashboard-avatar">
+          <span th:utext="${album.albumname}" class=""></span>
+          <a class="btn btn-primary btn-sm" th:href="@{/albums/{id}(id=${album.id})}">詳細</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="bs-component">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>語句</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="word : ${words}">
+          <td th:text="${word.word}"></td>
+          <td th:text="${word.description}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="bs-component">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>HSK Level</th>
+          <th style="width: 80px;">語句</th>
+          <th style="width: 80px;">拼音</th>
+          <th>英訳</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="hanzi : ${hskhanzi}">
+          <td th:text="${hanzi.level}"></td>
+          <!-- <td th:text="${hanzi.hanzi}"></td> -->
+          <td class="">
+            <a th:href="@{/musics/search(query=${hanzi.hanzi})}"><span th:text="${hanzi.hanzi}" class=""></span></a>
+          </td>
+          <td th:text="${hanzi.pinyin}"></td>
+          <td th:text="${hanzi.translations}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+
+</html>

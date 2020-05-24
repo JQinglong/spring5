@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/template :: layout(~{::title},~{::body/content()})}">
+
+<head>
+    <title>曲情報</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Show Player</h1>
+        <div th:object="${music}">
+          <div>
+            <label>曲名</label>
+            <p th:text="*{title}"></p>
+          </div>
+          <div>
+            <label>歌詞</label>
+            <p th:text="*{lyrics}"></p>
+          </div>
+          <div>
+            <label>映像</label>
+            <p th:text="*{url}"></p>
+          </div>
+        </div>
+
+        <div class="pull-right">
+          <a class="btn btn-link" href="/listform">一覧画面へ</a>
+        </div>
+      </div>
+
+</body>
+
+</html>

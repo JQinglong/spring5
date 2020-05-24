@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/template :: layout(~{::title},~{::body/content()})}">
+
+<head>
+  <title>アルバムリスト</title>
+</head>
+
+<body>
+  <h3>アルバムリスト</h3>
+  <!-- <form class="col-md-8" th:action="@{/albums/search}" th:object="${form}" method="post">
+    <div class="form-group mb-6">
+      <input placeholder="歌詞検索（繁体字）　※複数キーワードを指定できます" class="search-query form-control col-md-10" name="query"
+        type="text">
+    </div>
+    <button type="submit" class="btn btn-info mb-2">検索</button>
+  </form> -->
+
+  <table class="table table-hover">
+
+    <tbody>
+
+      <tr th:each="album:${albums}">
+        <td>
+          <a th:href="@{/albums/{id}(id=${album.id})}">
+            <div>
+              <img th:src="@{${album.images}}" class="dashboard-avatar">
+              <span th:utext="${album.albumname}" class=""></span>
+            </div>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+
+</html>

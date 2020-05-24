@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/template :: layout(~{::title},~{::body/content()})}">
+
+<head>
+    <title>曲リスト</title>
+</head>
+
+<body>
+    <div class="bs-component">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>曲名</th>
+                    <th>歌詞</th>
+                    <th>映像URL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="data : ${musics}">
+                    <td th:text="${data.title}"></td>
+                    <td th:text="${data.lyrics}"></td>
+                    <td th:text="${data.url}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
